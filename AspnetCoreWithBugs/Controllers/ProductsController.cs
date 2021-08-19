@@ -34,6 +34,7 @@ namespace AspnetCoreWithBugs.Controllers
             if (ModelState.IsValid)
             {
                 await _context.AddAsync(product);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
@@ -80,6 +81,7 @@ namespace AspnetCoreWithBugs.Controllers
         {
             var product = await _context.Products.FindAsync(id);
             _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
